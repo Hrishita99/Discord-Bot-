@@ -1,10 +1,13 @@
+require("dotenv").config();
 const Discord = require('discord.js');
 const { type, userInfo } = require('os');
 const { parse } = require('path');
 const client = new Discord.Client();
 
+client.login(process.env.BOT_TOKEN);
+
 client.on('ready', () => {
-    console.log("Connected as " + client.user.tag);
+    console.log("Connected as " + client.user.username);
 
     let gen = client.channels.cache.get("857354385594908694");
     gen.send("To hear a joke type `?joke` or to hear a fact type `!fact`");
@@ -68,7 +71,9 @@ client.on('ready', () => {
         else if(msg.content === "!fact"){ 
             msg.channel.send(facts[Math.floor(Math.random() * facts.length)])
         } 
+
+        else{
+            msg.channel.send("Invalid Command! Try again with `?joke` or `!fact` ");
+        }
     });
 });
-
-client.login("ODU3MzU1NTQ1MjE1NTAwMjg4.YNOYkg.PXkKYXzQhZkwYFhxtoimXzaeBlk");
